@@ -36,6 +36,12 @@ body.landing-page::before {
   z-index: -1;
 }
 
+@media (pointer: coarse) {
+  body.landing-page {
+    background-attachment: scroll;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

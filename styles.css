@@ -25,25 +25,19 @@ body {
 
 body.landing-page {
   position: relative;
-  background: #040404;
-  overflow: hidden;
+  background-color: #040404;
+  background-image: linear-gradient(var(--overlay), var(--overlay)),
+    url('assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll, scroll;
 }
 
-body.landing-page::before,
-body.landing-page::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
-
-body.landing-page::after {
-  background: url('assets/images/background.jpg') center/cover no-repeat;
-  z-index: -2;
-}
-
-body.landing-page::before {
-  background: var(--overlay);
+@media (min-width: 1024px) {
+  body.landing-page {
+    background-attachment: scroll, fixed;
+  }
 }
 
 a {

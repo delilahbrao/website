@@ -25,21 +25,25 @@ body {
 
 body.landing-page {
   position: relative;
-  background: url('assets/images/background.jpg') center/cover no-repeat fixed;
+  background: #040404;
+  overflow: hidden;
 }
 
-body.landing-page::before {
+body.landing-page::before,
+body.landing-page::after {
   content: '';
   position: fixed;
   inset: 0;
-  background: var(--overlay);
   z-index: -1;
 }
 
-@media (pointer: coarse) {
-  body.landing-page {
-    background-attachment: scroll;
-  }
+body.landing-page::after {
+  background: url('assets/images/background.jpg') center/cover no-repeat;
+  z-index: -2;
+}
+
+body.landing-page::before {
+  background: var(--overlay);
 }
 
 a {

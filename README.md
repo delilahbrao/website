@@ -5,7 +5,6 @@ These are the main files we care about:
 - `index.html`: main landing page.
 - `profile/index.html`: profile page.
 - `assets/`: images and icons.
-- `spotify.html`: standalone spotify widget code.
 
 ## Making changes
 

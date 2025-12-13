@@ -21,6 +21,8 @@ To change the photos that appear on the site, replace the existing photos in `as
 2. The photos are not too heavy so the site doesn't take too long to load
 3. The photos have appropriate dimensions so they look good.
 
+Hint: to figure out the dimesions the replacement photo should have, download photo to be replaced from `asses/images` and check its dimensions (i.e., right click on it -> Get Info -> More Info).
+
 ### Content
 
 To change the content of the site, update the corresponding file. For instance, to change the profile text, open `profile/index.html`, make changes to it and commit them. 

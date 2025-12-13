@@ -10,7 +10,9 @@ These are the main files we care about:
 
 Click on the file you want to update, then click on the "Edit this file" pen icon at the top right corner. After making the desired changes, click on "Commit changes" and confirm. They should be visible in the website shortly after.
 
-You can always ask ChatGPT for help. Copy and paste the files contents in chat gpt and ask it to make the desired changes for you. Copy the result back in githubb and commit the changes.
+You can always ask ChatGPT for help. Copy and paste the files contents in chat gpt and ask it to make the desired changes for you. Copy the result back in GitHub and commit the changes.
+
+Hint: When editing a file, pres Cmd + F to search for a piece of text.
 
 ### Photos
 

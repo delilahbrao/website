@@ -16,7 +16,10 @@ Hint: When editing a file, pres Cmd + F to search for a piece of text.
 
 ### Photos
 
-To change the photos that appear on the site, just drop replacement files into `assets/images` using the same filename. Make sure the files are not too heavy so the website does not take too long to load.
+To change the photos that appear on the site, replace the existing photos in `assets/images`. Make sure that:
+1. You use the exact same name for replacement photos!
+2. The photos are not too heavy so the site doesn't take too long to load
+3. The photos have appropriate dimensions so they look good.
 
 ### Content
 

@@ -30,6 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
     closeDropdowns();
   });
 
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+  const openModal = (id) => {
+    const modal = document.getElementById(id);
+    if (modal && typeof modal.showModal === 'function') {
+      modal.showModal();
+      return true;
+    }
+    return false;
+  };
+
   dropdownParents.forEach((parent) => {
     const trigger = parent.querySelector('.nav-trigger');
     if (!trigger) {
@@ -39,10 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
     trigger.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
+
+      if (mobileQuery.matches) {
+        const modalId = parent.querySelector('.listen-dropdown')
+          ? 'listen-modal'
+          : 'follow-modal';
+        if (openModal(modalId)) return;
+      }
+
       const isOpen = parent.classList.contains('open');
       closeDropdowns();
       parent.classList.toggle('open', !isOpen);
       trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  document.querySelectorAll('.link-modal').forEach((modal) => {
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) modal.close();
+    });
+    const closeBtn = modal.querySelector('.link-modal-close');
+    if (closeBtn) closeBtn.addEventListener('click', () => modal.close());
+    modal.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => modal.close());
     });
   });
 

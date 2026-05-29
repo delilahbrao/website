@@ -2,8 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="The Official Website of Delilah Brao. Watch, listen, and more" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The official website of Delilah Brao. Watch, listen, and more." />
+    <link rel="canonical" href="https://delilahbrao.com/" />
     <title>Delilah Brao</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Delilah Brao" />
+    <meta property="og:title" content="Delilah Brao" />
+    <meta property="og:description" content="The official website of Delilah Brao. Watch, listen, and more." />
+    <meta property="og:url" content="https://delilahbrao.com/" />
+    <meta property="og:image" content="https://delilahbrao.com/assets/images/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@heyoitsbrao" />
+    <meta name="twitter:title" content="Delilah Brao" />
+    <meta name="twitter:description" content="The official website of Delilah Brao. Watch, listen, and more." />
+    <meta name="twitter:image" content="https://delilahbrao.com/assets/images/og.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap"
       rel="stylesheet"
@@ -27,6 +48,51 @@
       href="assets/favicon/Icon-512.png"
     />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L2WLD38ZQQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L2WLD38ZQQ');
+    </script>
+
+    <!-- Meta Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1549070946647703');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1549070946647703&ev=PageView&noscript=1"
+        alt=""
+      />
+    </noscript>
+
+    <!-- Spotify Ads Pixel -->
+    <script>
+      (function (w, d) {
+        var id = 'spdt-capture', n = 'script';
+        if (!d.getElementById(id)) {
+          w.spdt = w.spdt || function () { (w.spdt.q = w.spdt.q || []).push(arguments); };
+          var e = d.createElement(n); e.id = id; e.async = 1;
+          e.src = 'https://pixel.byspotify.com/ping.min.js';
+          var s = d.getElementsByTagName(n)[0];
+          s.parentNode.insertBefore(e, s);
+        }
+        w.spdt('conf', { key: '24fba472144f46aeb9e9926d828e378c' });
+        w.spdt('view');
+      })(window, document);
+    </script>
   </head>
   <body class="landing-page">
     <header class="site-header">
@@ -36,7 +102,7 @@
             <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="has-dropdown">
-            <button class="nav-link nav-trigger" type="button">
+            <button class="nav-link nav-trigger" type="button" aria-expanded="false">
               Listen
               <span aria-hidden="true" class="chevron">▾</span>
             </button>
@@ -67,7 +133,7 @@
               </li>
               <li>
                 <a
-                  href="https://music.amazon.com/artists/B083MWLP6S/delilah-brao"
+                  href="https://music.amazon.com/artists/B085NMYGF3"
                   target="_blank"
                   rel="noopener noreferrer"
                   >Amazon Music</a
@@ -83,7 +149,7 @@
               </li>
               <li>
                 <a
-                  href="https://tidal.com/browse/artist/17673525"
+                  href="https://tidal.com/artist/11907136/"
                   target="_blank"
                   rel="noopener noreferrer"
                   >Tidal</a
@@ -91,7 +157,7 @@
               </li>
               <li>
                 <a
-                  href="https://www.deezer.com/en/artist/82092342"
+                  href="https://www.deezer.com/us/artist/50283052"
                   target="_blank"
                   rel="noopener noreferrer"
                   >Deezer</a
@@ -100,7 +166,7 @@
             </ul>
           </li>
           <li class="has-dropdown">
-            <button class="nav-link nav-trigger" type="button">
+            <button class="nav-link nav-trigger" type="button" aria-expanded="false">
               Follow
               <span aria-hidden="true" class="chevron">▾</span>
             </button>
@@ -187,6 +253,7 @@
 
     <div class="spotify-widget" aria-label="Spotify album embed">
       <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/3iyXmipPOcFszbF6JHdR4v?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
 
     <footer class="icon-footer">
       <div class="icon-row">

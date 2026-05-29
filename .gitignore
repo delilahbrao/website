@@ -1,0 +1,44 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+.zed/
+*.swp
+*~
+
+# AI agents / dev tooling — keep our internal docs and configs out of the public repo
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.claude/
+.cursor/
+.cursorrules
+.aider*
+.continue/
+.windsurf/
+.codeium/
+.github/copilot-*
+
+# Local notes / scratch
+*.local.md
+notes/
+scratch/
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+
+# Dependencies (just in case anyone ever adds them)
+node_modules/
+
+# Env / secrets
+.env
+.env.*

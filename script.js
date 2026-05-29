@@ -9,7 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const dropdownParents = Array.from(nav.querySelectorAll('.has-dropdown'));
 
   const closeDropdowns = () => {
-    dropdownParents.forEach((parent) => parent.classList.remove('open'));
+    dropdownParents.forEach((parent) => {
+      parent.classList.remove('open');
+      const trigger = parent.querySelector('.nav-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
   };
 
   const closeMenu = () => {
@@ -38,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = parent.classList.contains('open');
       closeDropdowns();
       parent.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
     });
   });
 
@@ -46,6 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('click', closeDropdowns);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const menuOpen = document.body.classList.contains('nav-open');
+    const anyDropdownOpen = dropdownParents.some((p) => p.classList.contains('open'));
+    if (menuOpen) {
+      closeMenu();
+      toggle.focus();
+    } else if (anyDropdownOpen) {
+      const openParent = dropdownParents.find((p) => p.classList.contains('open'));
+      closeDropdowns();
+      const trigger = openParent && openParent.querySelector('.nav-trigger');
+      if (trigger) trigger.focus();
+    }
+  });
 
   const includeTargets = document.querySelectorAll('[data-include]');
   includeTargets.forEach((target) => {

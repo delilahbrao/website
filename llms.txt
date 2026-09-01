@@ -1,0 +1,17 @@
+# Delilah Brao
+
+> Official website of Delilah Brao — indie-pop singer-songwriter from Boston,
+> Massachusetts, based in Los Angeles. New single "Away with words" (2026).
+> Debut album due 2027.
+
+Structured data: MusicGroup JSON-LD on / and /about/ (@id https://delilahbrao.com/#artist);
+MusicAlbum JSON-LD on each /music/ page; FAQPage JSON-LD on /faq/.
+
+## Pages
+- [About](https://delilahbrao.com/about/): bio and background
+- [FAQ](https://delilahbrao.com/faq/): direct answers — who, genre, hometown, best-known songs
+- [Since You're In New York](https://delilahbrao.com/music/since-youre-in-new-york/): 2024 debut EP — credits, tracklist, links
+- [lately i don't feel right](https://delilahbrao.com/music/lately-i-dont-feel-right/): 2025 EP — credits, tracklist, links
+- [February, now](https://delilahbrao.com/music/february-now/): 2026 single
+- [Doomed](https://delilahbrao.com/music/doomed/): 2026 single
+- [Away with words](https://delilahbrao.com/music/away-with-words/): 2026 single, official music video

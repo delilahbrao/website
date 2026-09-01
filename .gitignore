@@ -42,3 +42,12 @@ node_modules/
 # Env / secrets
 .env
 .env.*
+
+# v2 planning doc (internal)
+Scope.md
+
+# v2 scratch artifacts (internal)
+tmp/
+
+# v2 prompt/scope docs (internal)
+prompts/

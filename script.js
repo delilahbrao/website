@@ -1,122 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('menu-toggle');
-  const nav = document.getElementById('primary-navigation');
+// Delilah Brao — v2. Progressive enhancement only; the site works with JS off.
 
-  if (!toggle || !nav) {
-    return;
-  }
-
-  const dropdownParents = Array.from(nav.querySelectorAll('.has-dropdown'));
-
-  const closeDropdowns = () => {
-    dropdownParents.forEach((parent) => {
-      parent.classList.remove('open');
-      const trigger = parent.querySelector('.nav-trigger');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    });
-  };
-
-  const closeMenu = () => {
-    document.body.classList.remove('nav-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    closeDropdowns();
-  };
-
-  toggle.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    document.body.classList.toggle('nav-open', !expanded);
-    closeDropdowns();
-  });
-
-  const mobileQuery = window.matchMedia('(max-width: 768px)');
-
-  const openModal = (id) => {
-    const modal = document.getElementById(id);
-    if (modal && typeof modal.showModal === 'function') {
-      modal.showModal();
-      return true;
-    }
-    return false;
-  };
-
-  dropdownParents.forEach((parent) => {
-    const trigger = parent.querySelector('.nav-trigger');
-    if (!trigger) {
-      return;
-    }
-
-    trigger.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (mobileQuery.matches) {
-        const modalId = parent.querySelector('.listen-dropdown')
-          ? 'listen-modal'
-          : 'follow-modal';
-        if (openModal(modalId)) return;
-      }
-
-      const isOpen = parent.classList.contains('open');
-      closeDropdowns();
-      parent.classList.toggle('open', !isOpen);
-      trigger.setAttribute('aria-expanded', String(!isOpen));
+(function () {
+  // Click-to-play YouTube: swap the thumbnail for the real iframe on demand,
+  // so no YouTube JS loads until a visitor asks for a video.
+  document.querySelectorAll('.video-play').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var frame = btn.closest('.video-frame');
+      var id = frame.getAttribute('data-video-id');
+      var title = btn.getAttribute('data-video-title') || 'YouTube video';
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      iframe.title = title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      frame.innerHTML = '';
+      frame.appendChild(iframe);
     });
   });
 
-  document.querySelectorAll('.link-modal').forEach((modal) => {
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) modal.close();
+  // Fade grid cells in as they enter the viewport.
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var cells = document.querySelectorAll('.track-cell, .video-cell');
+    cells.forEach(function (cell) {
+      cell.style.opacity = '0';
+      cell.style.transform = 'translateY(14px)';
+      cell.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     });
-    const closeBtn = modal.querySelector('.link-modal-close');
-    if (closeBtn) closeBtn.addEventListener('click', () => modal.close());
-    modal.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => modal.close());
-    });
-  });
-
-  nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  document.addEventListener('click', closeDropdowns);
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    const menuOpen = document.body.classList.contains('nav-open');
-    const anyDropdownOpen = dropdownParents.some((p) => p.classList.contains('open'));
-    if (menuOpen) {
-      closeMenu();
-      toggle.focus();
-    } else if (anyDropdownOpen) {
-      const openParent = dropdownParents.find((p) => p.classList.contains('open'));
-      closeDropdowns();
-      const trigger = openParent && openParent.querySelector('.nav-trigger');
-      if (trigger) trigger.focus();
-    }
-  });
-
-  const includeTargets = document.querySelectorAll('[data-include]');
-  includeTargets.forEach((target) => {
-    const src = target.getAttribute('data-include');
-    if (!src) {
-      return;
-    }
-
-    fetch(src)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to load ${src}`);
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'none';
+          seen.unobserve(entry.target);
         }
-
-        return response.text();
-      })
-      .then((html) => {
-        target.innerHTML = html;
-      })
-      .catch((error) => {
-        console.error(error);
       });
-  });
-});
+    }, { threshold: 0.15 });
+    cells.forEach(function (cell) { seen.observe(cell); });
+  }
+})();

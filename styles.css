@@ -1,351 +1,131 @@
+/* ==========================================================================
+   Delilah Brao — v2 "Album Showcase"
+   One theme per page, set via a class on <body>:
+     .theme-album3  — debut album / home  (dark baroque, maroon + candle gold)
+     .theme-syiny   — Since You're In New York  (silver film, dusty pink)
+     .theme-lately  — lately i don't feel right (sky-blue scrapbook)
+   Palettes are pulled from each release's cover art (see prompts/v2-website-scope.md).
+   ========================================================================== */
+
 :root {
-  --text-color: #f5f4f1;
-  --muted-color: #dcdcdc;
-  --accent-color: #5cb5ff;
-  --overlay: rgba(0, 0, 0, 0.55);
-  --dropdown-bg: rgba(0, 0, 0, 0.85);
-  --header-blur: rgba(0, 0, 0, 0.35);
-  font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-script: "Pinyon Script", cursive;
+  --font-hand: "Caveat", cursive;
+  --font-serif: "EB Garamond", serif;
+  --font-chalk: "Reenie Beanie", cursive;
+  --font-gothic: "Grenze Gotisch", serif;
+
+  --page-base: #070405;
+  --max-width: 1080px;
 }
 
-*,
-*::before,
-*::after {
+/* --- themes --------------------------------------------------------------- */
+
+.theme-album3 {
+  --bg-tint: #310000;
+  --bg-glow: #602828;
+  --accent: #b56455;
+  --text: #ffffff;
+  --muted: #ffbdb9;
+  --font-track: "EB Garamond", serif;
+  --track-size: 1.12rem;
+}
+
+.theme-syiny {
+  --bg-tint: #26262c;
+  --bg-glow: #53535a;
+  --accent: #cdb3b3;
+  --text: #ffffff;
+  --muted: #cdcdd5;
+  --font-track: "Shadows Into Light Two", cursive;
+  --track-size: 1.15rem;
+}
+
+.theme-lately {
+  --bg-tint: #003456;
+  --bg-glow: #00587d;
+  --accent: #82d8ff;
+  --text: #ffffff;
+  --muted: #a8ddf5;
+  --font-track: "Reenie Beanie", cursive;
+  --track-size: 1.55rem;
+}
+
+/* --- base ------------------------------------------------------------------ */
+
+* {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--text);
+  background-color: var(--page-base);
+  background-image:
+    radial-gradient(120% 90% at 50% -10%, var(--bg-glow) 0%, transparent 55%),
+    radial-gradient(100% 70% at 50% 115%, var(--bg-tint) 0%, transparent 60%);
+  background-attachment: fixed;
   min-height: 100vh;
-  color: var(--text-color);
-  background-color: #040404;
-  font-family: inherit;
-  letter-spacing: 0.08em;
+  line-height: 1.6;
 }
 
-body.landing-page {
-  position: relative;
-  background-color: #040404;
-  background-image: linear-gradient(var(--overlay), var(--overlay)),
-    url('assets/images/background.jpg');
-  background-image: linear-gradient(var(--overlay), var(--overlay)),
-    image-set(
-      url('assets/images/background.avif') type('image/avif'),
-      url('assets/images/background.webp') type('image/webp'),
-      url('assets/images/background.jpg') type('image/jpeg')
-    );
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll, scroll;
-}
-
-@media (min-width: 1024px) {
-  body.landing-page {
-    background-attachment: scroll, fixed;
-  }
-}
-
-@media (max-width: 768px) and (orientation: portrait) {
-  body.landing-page {
-    background-size: 100% 100%, auto 140%;
-    background-position: 0 0, 30% 85%;
-  }
+/* film grain over everything — every cover is analog photography */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 a {
   color: inherit;
-  text-decoration: none;
 }
 
-button {
-  font: inherit;
-  color: inherit;
-  background: none;
-  border: none;
-  cursor: pointer;
-  letter-spacing: inherit;
-}
-
-.site-header {
-  position: fixed;
-  top: 24px;
-  left: 0;
-  width: 100%;
-  padding: 24px 32px;
-  z-index: 10;
-}
-
-.main-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 60px;
-  padding: 0;
-  margin: 0;
-  align-items: center;
-}
-
-.nav-link {
-  text-transform: uppercase;
-  font-size: 0.82rem;
-  letter-spacing: 0.25em;
-  transition: color 0.2s ease;
-}
-
-.nav-link:hover,
-.nav-link:focus-visible {
-  color: var(--accent-color);
-}
-
-.has-dropdown {
-  position: relative;
-}
-
-.nav-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.chevron {
-  font-size: 0.7rem;
-  letter-spacing: 0;
-  transform: translateY(-1px);
-}
-
-.dropdown {
-  position: absolute;
-  top: calc(100% + 20px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--dropdown-bg);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  list-style: none;
-  padding: 12px 0;
-  width: 180px;
-  display: none;
-}
-
-.dropdown li a {
+img {
+  /* natural aspect ratios everywhere — never distort or crop cover art */
+  max-width: 100%;
+  height: auto;
   display: block;
-  padding: 10px 22px;
-  font-size: 0.78rem;
-  text-transform: lowercase;
-  letter-spacing: 0.2em;
-  color: var(--muted-color);
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.dropdown li a:hover,
-.dropdown li a:focus-visible {
-  color: var(--accent-color);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.has-dropdown.open .dropdown {
-  display: block;
-}
-
-.menu-toggle {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 6px;
-  transition: border-color 0.2s ease;
-}
-
-.menu-toggle .bar {
-  width: 60%;
-  height: 2px;
-  background: var(--text-color);
-  display: block;
-}
-
-.menu-toggle:hover,
-.menu-toggle:focus-visible {
-  border-color: var(--accent-color);
-}
-
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 160px 16px 140px;
-  text-align: center;
-}
-
-.hero-link {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  letter-spacing: 0.35em;
-  text-transform: lowercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  padding-bottom: 8px;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.hero-link:hover,
-.hero-link:focus-visible {
-  color: var(--accent-color);
-  border-color: var(--accent-color);
-}
-
-.spotify-widget {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: min(480px, 40vw);
-  max-width: 520px;
-  z-index: 9;
-  pointer-events: auto;
-}
-
-.spotify-widget iframe {
-  width: 100%;
-  border: none;
-}
-
-.icon-footer {
-  position: fixed;
-  bottom: 24px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.icon-row {
-  display: flex;
-  gap: 20px;
-  pointer-events: auto;
-}
-
-.icon-link {
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  color: var(--text-color);
-  opacity: 0.9;
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.icon-link:hover,
-.icon-link:focus-visible {
-  opacity: 1;
-  color: var(--accent-color);
-}
-
-.icon-link svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
-}
-
-.link-modal {
-  border: none;
-  padding: 0;
-  margin: auto;
-  border-radius: 16px;
-  background: #0c0c0c;
-  color: var(--text-color);
-  max-width: 360px;
-  width: calc(100% - 32px);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
-}
-
-.link-modal::backdrop {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-}
-
-.link-modal-inner {
-  position: relative;
-  padding: 28px 22px 18px;
-}
-
-.link-modal-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  font-size: 1.6rem;
-  line-height: 1;
-  color: var(--muted-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.link-modal-close:hover,
-.link-modal-close:focus-visible {
-  color: var(--accent-color);
-}
-
-.link-modal h2 {
-  margin: 0 0 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-align: center;
-}
-
-.link-modal-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.link-modal-list a {
-  display: block;
-  padding: 14px 8px;
-  font-size: 1rem;
-  letter-spacing: 0.2em;
-  text-transform: lowercase;
-  color: var(--text-color);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  text-align: center;
-  transition: color 0.2s ease;
-}
-
-.link-modal-list li:last-child a {
-  border-bottom: none;
-}
-
-.link-modal-list a:hover,
-.link-modal-list a:focus-visible {
-  color: var(--accent-color);
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -140%);
+  top: 0;
+  z-index: 20;
+  background: var(--accent);
+  color: var(--page-base);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
+.copyright {
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--muted) 70%, transparent);
+  margin: 0.2rem 0 0;
 }
 
 .sr-only {
@@ -355,129 +135,931 @@ button {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
   border: 0;
 }
 
-.profile-page {
-  background: #050505;
-}
+/* --- header: centered wordmark + era-styled nav ------------------------------- */
 
-.profile-page .site-header {
-  padding-bottom: 32px;
-}
-
-.profile-main {
-  padding: 180px 24px 200px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.profile-card {
-  max-width: 900px;
+.site-header {
+  padding: 1.5rem 1.25rem 0;
   text-align: center;
 }
 
-.profile-avatar {
-  width: 220px;
-  height: 220px;
+/* "Delilah Brao" in the latest-album style: the Away-with-words copperplate,
+   silver like the February engraving */
+.wordmark {
+  display: inline-block;
+  font-family: var(--font-script);
+  font-size: clamp(2.1rem, 4.5vw, 3.1rem);
+  line-height: 1.05;
+  text-decoration: none;
+  color: var(--text);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--bg-glow) 75%, #fff 25%);
+}
+
+.main-nav {
+  margin-top: 0.6rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.25rem 0.15rem;
+  border-bottom: 1px solid transparent;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-links a[aria-current="page"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* extracted hand-lettering lockups as nav buttons (syiny, lately) */
+.nav-links a.nav-lockup {
+  border-bottom-width: 2px;
+  padding-bottom: 0.35rem;
+}
+
+.nav-links a.nav-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.nav-links .nav-lockup img.lockup {
+  height: 1.35rem;
+  width: auto;
+  opacity: 0.72;
+  transition: opacity 0.2s ease;
+}
+
+/* offset down so the lettering sits on the shared text baseline
+   (images include descender space below their visual baseline) */
+.nav-links .nav-syiny img.lockup {
+  transform: translateY(3px);
+}
+
+.nav-links .nav-lately img.lockup {
+  transform: translateY(4px);
+}
+
+.nav-links .nav-lockup img.nav-thumb {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links .nav-lockup img.nav-thumb.round {
   border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid rgba(255, 255, 255, 0.4);
-  margin-bottom: 32px;
 }
 
-.profile-bio {
+.nav-links .nav-lockup:hover img,
+.nav-links .nav-lockup[aria-current="page"] img {
+  opacity: 1;
+}
+
+/* about stays plain — v1's Space Grotesk, no shouting */
+
+
+/* each destination previews its own era's typography */
+.nav-links .nav-album3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.nav-links .nav-lately {
+  font-family: var(--font-chalk);
+  font-size: 1.45rem;
+}
+
+.nav-links .nav-syiny {
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+}
+
+.nav-links .nav-about {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  top: 4px;
+}
+
+.nav-sep {
+  color: color-mix(in srgb, var(--muted) 45%, transparent);
+  user-select: none;
+  align-self: center;
+}
+
+/* --- hero ------------------------------------------------------------------- */
+
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.25rem 2rem;
+  text-align: center;
+}
+
+.hero-kicker {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin: 0 0 1.6rem;
+}
+
+/* release-title lockups: the real hand lettering from the covers */
+.hero-lockup {
+  margin: 0 auto;
+  max-width: 620px;
+}
+
+/* white-ink lockups (away): screen blend melts the crop into the page */
+.hero-lockup.blend img {
+  mix-blend-mode: screen;
+  margin: 0 auto;
+}
+
+/* paper-scrap lockups (syiny, lately): shown as a collage cutout */
+.hero-lockup.scrap img {
+  transform: rotate(-1.6deg);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+  margin: 0 auto;
+}
+
+.hero-title {
+  /* text fallback + about page */
+  font-family: var(--font-hand);
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 400;
+  margin: 0;
+}
+
+.hero-sub {
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 1.4rem auto 0;
+}
+
+/* --- featured single (home): centered video + centered copy -------------------- */
+
+.featured-stack {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 0;
+  text-align: center;
+}
+
+.featured-stack .video-frame {
+  margin: 0 auto;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.65);
+}
+
+.featured-stack .featured-tag {
+  margin: 1.6rem 0 0.2rem;
+}
+
+.featured-stack .featured-title {
+  margin: 0 0 1.2rem;
+}
+
+.featured-stack .btn-row {
+  justify-content: center;
+}
+
+/* "Debut Album coming 2027" — quiet accent line below the single */
+.album-tease {
+  font-family: var(--font-track);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-align: center;
+  margin: 0 0 2rem;
+}
+
+.album-tease .release-year {
+  font-family: var(--font-gothic);
   font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  line-height: 1.9;
-  color: var(--muted-color);
+  color: var(--accent);
+  margin-left: 0.7rem;
 }
 
-@media (min-width: 769px) and (max-width: 1350px) {
-  .icon-footer {
-    padding-right: calc(min(480px, 40vw) + 48px);
-  }
+/* --- featured single (home) -------------------------------------------------- */
+
+.featured {
+  max-width: 1160px;
+  margin: 1rem auto 0;
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(300px, 640px) 1fr;
+  gap: 2.4rem;
+  align-items: center;
 }
 
-@media (max-width: 900px) {
-  .nav-links {
-    gap: 28px;
-    padding: 10px 24px;
-  }
+.featured .video-frame {
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.65);
 }
 
-@media (max-width: 768px) {
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+.featured-art img {
+  border-radius: 6px;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.6);
+}
+
+.featured-tag {
+  font-family: var(--font-track);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin: 0 0 0.6rem;
+}
+
+.featured-title {
+  font-family: var(--font-track);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 500;
+  margin: 0 0 0.8rem;
+  line-height: 1.1;
+}
+
+.featured-copy {
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+  max-width: 44ch;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: var(--font-track);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: var(--page-base);
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--page-base);
+}
+
+@media (max-width: 720px) {
+  .featured {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .site-header { order: 0; position: static; padding: 14px 16px 0; }
-  .hero { order: 1; flex: 0 0 auto; min-height: 0; }
-  .profile-main { order: 1; flex: 1; min-height: 0; }
-  .icon-footer { order: 2; }
-  .spotify-widget { order: 3; margin-top: auto; }
-
-  .main-nav { justify-content: center; }
-  .menu-toggle { display: none !important; }
-
-  .nav-links {
-    flex-direction: row;
-    position: static;
-    transform: none;
-    background: transparent;
-    height: auto;
-    width: auto;
-    padding: 0;
-    gap: 14px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .nav-link {
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    padding: 10px 4px;
-  }
-
-  .chevron { display: none; }
-
-  /* Inline dropdowns hidden on mobile — modals take over */
-  .has-dropdown .dropdown { display: none !important; }
-
-  .hero { padding: 80px 16px 38px; }
-  .profile-main { padding: 100px 20px 24px; }
-  .profile-avatar { width: 160px; height: 160px; margin-bottom: 24px; }
-
-  .icon-footer {
-    position: static;
-    width: 100%;
-    padding: 12px 16px 16px;
-  }
-
-  .icon-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px 18px;
-    max-width: 220px;
+  .featured-art {
+    max-width: 320px;
     margin: 0 auto;
   }
 
-  .icon-link { width: 38px; height: 38px; flex: 0 0 auto; }
+  .btn-row {
+    justify-content: center;
+  }
+}
 
-  .spotify-widget {
-    position: static;
-    width: 100%;
-    max-width: none;
-    padding: 0 12px 16px;
+/* --- cover grid: square art, focus-on-hover ---------------------------------- */
+
+.tracks {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+}
+
+/* combined songs + videos section: wider, centered */
+.tracks.wide {
+  max-width: 1300px;
+}
+
+.tracks.wide .section-label {
+  text-align: center;
+}
+
+.mosaic {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.4rem 1.8rem;
+}
+
+.mosaic > li.track-cell {
+  width: min(250px, 100%);
+}
+
+.mosaic > li.track-cell:nth-child(3n) {
+  width: min(310px, 100%);
+}
+
+.mosaic > li.track-cell:nth-child(5n + 2) {
+  width: min(215px, 100%);
+}
+
+.mosaic > li.video-cell {
+  width: min(520px, 100%);
+}
+
+.mosaic > li.video-cell:nth-child(2n) {
+  width: min(440px, 100%);
+}
+
+/* editorial rhythm on wide screens — not a rigid grid */
+@media (min-width: 900px) {
+  .mosaic > li:nth-child(3n + 2) {
+    transform: translateY(1.6rem);
   }
 
-  .link-modal { max-width: 340px; }
-  .link-modal-list a { padding: 16px 8px; }
+  .mosaic > li:nth-child(4n + 3) {
+    transform: translateY(-0.6rem);
+  }
+}
+
+/* mobile: collapse to a simple single-column list */
+@media (max-width: 560px) {
+  .mosaic > li.track-cell,
+  .mosaic > li.video-cell {
+    width: 100%;
+  }
+
+  .mosaic > li {
+    transform: none;
+  }
+}
+
+/* focus effect applies across the combined grid too */
+.mosaic:hover > li:not(:hover),
+.mosaic:focus-within > li:not(:focus-within) {
+  opacity: 0.55;
+}
+
+.mosaic > li {
+  transition: opacity 0.3s ease;
+}
+
+/* release-name heading over the combined grid */
+.release-label {
+  font-family: var(--font-track);
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 2.4rem;
+}
+
+.release-label .release-year {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  vertical-align: middle;
+  margin-left: 0.9rem;
+}
+
+.stream-link {
+  font-family: var(--font-track);
+  font-size: calc(var(--track-size) * 0.8);
+  text-decoration: none;
+  color: var(--muted);
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
+  padding-bottom: 0.1rem;
+}
+
+.stream-link:hover {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.section-label {
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  color: var(--muted);
+  margin: 0 0 1.8rem;
+}
+
+.track-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 2.4rem 1.8rem;
+  align-items: start;
+}
+
+.track-cell {
+  transition: opacity 0.3s ease;
+}
+
+/* focus effect: hovered cover lifts + glows, siblings recede */
+.track-grid:hover .track-cell:not(:hover),
+.track-grid:focus-within .track-cell:not(:focus-within) {
+  opacity: 0.55;
+}
+
+.sleeve {
+  display: block;
+}
+
+.sleeve img {
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+}
+
+.track-cell:hover .sleeve img,
+.track-cell:focus-within .sleeve img {
+  transform: scale(1.035);
+  filter: brightness(1.08);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.7),
+    0 0 0 1px color-mix(in srgb, var(--accent) 65%, transparent),
+    0 0 34px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sleeve img,
+  .track-cell {
+    transition: none;
+  }
+
+  .track-cell:hover .sleeve img,
+  .track-cell:focus-within .sleeve img {
+    transform: none;
+  }
+}
+
+/* song name below each piece of art — era handwriting/serif fonts */
+.track-meta {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  column-gap: 0.9rem;
+  row-gap: 0.2rem;
+  text-align: center;
+}
+
+/* song title on its own centered line; time + stream link on the line below */
+.track-meta .track-name {
+  flex-basis: 100%;
+}
+
+.track-name {
+  font-family: var(--font-track);
+  font-size: var(--track-size);
+  font-weight: 400;
+  line-height: 1.15;
+  text-decoration: none;
+}
+
+.track-cell:hover .track-name,
+.track-cell:focus-within .track-name,
+.video-cell:hover .track-name,
+.video-cell:focus-within .track-name,
+.video-cell:hover .video-title a,
+.video-cell:focus-within .video-title a {
+  color: var(--accent);
+}
+
+.track-cell:hover .stream-link,
+.video-cell:hover .stream-link {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.track-time {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.video-chip {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
+  border-radius: 999px;
+  padding: 0.12rem 0.6rem;
+  white-space: nowrap;
+}
+
+.video-chip:hover {
+  color: var(--page-base);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* --- videos: click-to-play YouTube embeds -------------------------------------- */
+
+.video-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem 1.8rem;
+}
+
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9; /* thumbnails are 16:9 sources letterboxed to 4:3 — this restores them, no distortion */
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55);
+  background: #000;
+}
+
+.video-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.25s ease;
+}
+
+.video-play::before {
+  content: "";
+  width: 64px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(7, 4, 5, 0.78);
+  grid-area: 1 / 1;
+}
+
+.video-play::after {
+  content: "";
+  grid-area: 1 / 1;
+  width: 0;
+  height: 0;
+  border-left: 18px solid #fff;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  margin-left: 4px;
+}
+
+.video-play:hover {
+  background: rgba(0, 0, 0, 0);
+}
+
+.video-play:hover::before {
+  background: var(--accent);
+}
+
+.video-cell:hover .video-frame img {
+  transform: scale(1.04);
+  filter: brightness(1.06);
+}
+
+.video-title {
+  margin-top: 0.8rem;
+  font-family: var(--font-track);
+  font-size: calc(var(--track-size) * 0.92);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.video-kind {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-left: 0.5rem;
+}
+
+/* --- live teasers (home) --------------------------------------------------- */
+
+.live-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.live-list a {
+  font-family: var(--font-track);
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: var(--muted);
+  border: 1px dashed color-mix(in srgb, var(--muted) 40%, transparent);
+  border-radius: 999px;
+  padding: 0.35rem 1.1rem;
+}
+
+.live-list a:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+/* --- spotify embed ----------------------------------------------------------- */
+
+.listen {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+}
+
+.listen iframe {
+  border: 0;
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* --- about / faq / release-info pages ----------------------------------------- */
+
+.profile-main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+.profile-card {
+  text-align: center;
+}
+
+.profile-card .hero-title {
+  font-family: var(--font-script);
+  font-weight: 400;
+}
+
+.profile-avatar {
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55);
+}
+
+.profile-bio {
+  text-align: left;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.faq-item h2 {
+  font-family: var(--font-track, "EB Garamond", serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin: 2rem 0 0.4rem;
+}
+
+.faq-item p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.profile-main img {
+  border-radius: 6px;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55);
+  margin: 1.5rem 0;
+}
+
+.profile-main .profile-avatar {
+  border-radius: 50%;
+}
+
+.profile-bio a {
+  color: var(--accent);
+}
+
+/* --- footer: two link sets ------------------------------------------------------ */
+
+.site-footer {
+  border-top: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
+  margin-top: 2rem;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.25rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+  text-align: center;
+}
+
+.link-set h2 {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  font-weight: 400;
+  color: var(--muted);
+  margin: 0 0 1.3rem;
+}
+
+.icon-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.4rem 1.6rem;
+}
+
+.icon-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.icon-links .icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--muted) 40%, transparent);
+  display: grid;
+  place-items: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.icon-links svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+  transition: color 0.2s ease;
+}
+
+.icon-links a:hover .icon-circle {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  color: var(--page-base);
+}
+
+.icon-links .icon-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.footer-note {
+  font-family: var(--font-script);
+  font-size: 1.5rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+
+/* --- album-3 (home) track meta: typography drawn from the 2026 covers ---------- */
+
+/* song names: the Doomed letterpress deboss */
+.theme-album3 .track-name,
+.theme-album3 .release-label {
+  font-family: var(--font-serif);
+  text-shadow:
+    0 -1px 1px rgba(0, 0, 0, 0.65),
+    0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* venue / video-kind tags: quiet Garamond; gothic reserved for the year tag */
+.theme-album3 .video-kind {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.theme-album3 .release-label .release-year {
+  font-family: var(--font-gothic);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+.theme-album3 .video-title {
+  font-family: var(--font-serif);
+  text-shadow:
+    0 -1px 1px rgba(0, 0, 0, 0.65),
+    0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* stream links: Garamond small caps — quiet, engraved */
+.theme-album3 .stream-link {
+  font-family: var(--font-serif);
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+}
+
+
+/* --- live section: wall gallery, not a grid ------------------------------------ */
+
+.mosaic.gallery {
+  gap: 2.6rem 2rem;
+  align-items: center;
+}
+
+.mosaic.gallery > li.video-cell {
+  width: min(400px, 100%);
+}
+
+.mosaic.gallery > li.video-cell:nth-child(4n + 1) {
+  width: min(520px, 100%);
+}
+
+.mosaic.gallery > li.video-cell:nth-child(5n + 3) {
+  width: min(560px, 100%);
+}
+
+.mosaic.gallery .video-cell:nth-child(odd) {
+  transform: rotate(-1.1deg) translateY(0.4rem);
+}
+
+.mosaic.gallery .video-cell:nth-child(even) {
+  transform: rotate(0.9deg) translateY(-0.5rem);
+}
+
+.mosaic.gallery .video-frame {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+}
+
+.mosaic.gallery .video-title {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .mosaic.gallery > li.video-cell,
+  .mosaic.gallery > li.video-cell:nth-child(4n + 1),
+  .mosaic.gallery > li.video-cell:nth-child(5n + 3) {
+    width: min(380px, 100%);
+  }
+}
+
+@media (max-width: 560px) {
+  .mosaic.gallery > li.video-cell {
+    width: 100%;
+    transform: none;
+  }
+}
+
+
+/* lately: performance titles run small in Reenie Beanie — bump them */
+.theme-lately .gallery .video-title {
+  font-size: calc(var(--track-size) * 1.1);
+}
+
+.theme-lately .gallery .video-kind {
+  font-size: 0.9rem;
 }

@@ -110,8 +110,7 @@ body::before {
     linear-gradient(to top, rgba(120, 46, 34, 0.18) 0%, transparent 32%);
 }
 
-/* home only: layered texture band built from the 2026 cover extracts
-   (assets/images/releases/album3/texture/1-4.png -> band.png), SYINY-style */
+/* home only: layered texture band composited from the 2026 cover artwork */
 .theme-album3.home::before {
   background:
     linear-gradient(to bottom,

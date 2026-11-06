@@ -15,4 +15,4 @@ MusicAlbum JSON-LD on each /music/ page; FAQPage JSON-LD on /faq/.
 - [February, now](https://delilahbrao.com/music/february-now/): 2026 single
 - [Doomed](https://delilahbrao.com/music/doomed/): 2026 single
 - [Away with words](https://delilahbrao.com/music/away-with-words/): 2026 single, official music video
-- [Death wish](https://delilahbrao.com/music/death-wish/): 2026 single
+- [Death wish](https://delilahbrao.com/music/death-wish/): 2026 single, official music video

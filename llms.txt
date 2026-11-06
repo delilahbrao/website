@@ -1,7 +1,7 @@
 # Delilah Brao
 
 > Official website of Delilah Brao — indie-pop singer-songwriter from Boston,
-> Massachusetts, based in Los Angeles. New single "Away with words" (2026).
+> Massachusetts, based in Los Angeles. New single "Death wish" (2026).
 > Debut album due 2027.
 
 Structured data: MusicGroup JSON-LD on / and /about/ (@id https://delilahbrao.com/#artist);
@@ -15,3 +15,4 @@ MusicAlbum JSON-LD on each /music/ page; FAQPage JSON-LD on /faq/.
 - [February, now](https://delilahbrao.com/music/february-now/): 2026 single
 - [Doomed](https://delilahbrao.com/music/doomed/): 2026 single
 - [Away with words](https://delilahbrao.com/music/away-with-words/): 2026 single, official music video
+- [Death wish](https://delilahbrao.com/music/death-wish/): 2026 single

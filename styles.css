@@ -1,9 +1,9 @@
 /* ==========================================================================
-   Delilah Brao — v2 "Album Showcase"
+   Delilah Brao - v2 "Album Showcase"
    One theme per page, set via a class on <body>:
-     .theme-album3  — debut album / home  (dark baroque, maroon + candle gold)
-     .theme-syiny   — Since You're In New York  (silver film, dusty pink)
-     .theme-lately  — lately i don't feel right (sky-blue scrapbook)
+     .theme-album3  - debut album / home  (dark baroque, maroon + candle gold)
+     .theme-syiny   - Since You're In New York  (silver film, dusty pink)
+     .theme-lately  - lately i don't feel right (sky-blue scrapbook)
    Palettes are pulled from each release's cover art (see prompts/v2-website-scope.md).
    ========================================================================== */
 
@@ -161,7 +161,7 @@ body::before {
   }
 }
 
-/* film grain over everything — every cover is analog photography */
+/* film grain over everything - every cover is analog photography */
 body::after {
   content: "";
   position: fixed;
@@ -187,7 +187,7 @@ main {
 }
 
 img {
-  /* natural aspect ratios everywhere — never distort or crop cover art */
+  /* natural aspect ratios everywhere - never distort or crop cover art */
   max-width: 100%;
   height: auto;
   display: block;
@@ -384,7 +384,7 @@ img {
   opacity: 1;
 }
 
-/* about stays plain — body sans, no shouting */
+/* about stays plain - body sans, no shouting */
 
 
 /* each destination previews its own era's typography */
@@ -505,7 +505,7 @@ img {
   justify-content: center;
 }
 
-/* "Debut Album coming 2027" — quiet accent line below the single */
+/* "Debut Album coming 2027" - quiet accent line below the single */
 .album-tease {
   font-family: var(--font-track);
   font-size: 1.35rem;
@@ -660,7 +660,7 @@ img {
   width: min(440px, 100%);
 }
 
-/* editorial rhythm on wide screens — not a rigid grid */
+/* editorial rhythm on wide screens - not a rigid grid */
 @media (min-width: 900px) {
   .mosaic > li:nth-child(3n + 2) {
     transform: translateY(1.6rem);
@@ -785,7 +785,7 @@ img {
   }
 }
 
-/* song name below each piece of art — era handwriting/serif fonts */
+/* song name below each piece of art - era handwriting/serif fonts */
 .track-meta {
   margin-top: 0.8rem;
   display: flex;
@@ -856,7 +856,7 @@ img {
 
 .video-frame {
   position: relative;
-  aspect-ratio: 16 / 9; /* thumbnails are 16:9 sources letterboxed to 4:3 — this restores them, no distortion */
+  aspect-ratio: 16 / 9; /* thumbnails are 16:9 sources letterboxed to 4:3 - this restores them, no distortion */
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55);
@@ -1160,7 +1160,7 @@ img {
     0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
-/* stream links: Garamond small caps — quiet, engraved */
+/* stream links: Garamond small caps - quiet, engraved */
 .theme-album3 .stream-link {
   font-family: var(--font-serif);
   letter-spacing: 0.04em;
@@ -1219,7 +1219,7 @@ img {
 }
 
 
-/* lately: performance titles run small in the chalk hand — bump them */
+/* lately: performance titles run small in the chalk hand - bump them */
 .theme-lately .gallery .video-title {
   font-size: calc(var(--track-size) * 1.1);
 }

@@ -1,4 +1,4 @@
-// Delilah Brao — v2. Progressive enhancement only; the site works with JS off.
+// Delilah Brao - v2. Progressive enhancement only; the site works with JS off.
 
 (function () {
   // Click-to-play YouTube: swap the thumbnail for the real iframe on demand,

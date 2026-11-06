@@ -13,7 +13,7 @@ Desktop.ini
 *.swp
 *~
 
-# AI agents / dev tooling — keep our internal docs and configs out of the public repo
+# AI agents / dev tooling - keep our internal docs and configs out of the public repo
 AGENTS.md
 CLAUDE.md
 GEMINI.md

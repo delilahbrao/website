@@ -43,3 +43,19 @@ the subdirectory pages won't resolve.
   regenerate the siblings (`cwebp`, `avifenc`) so browsers keep the fast paths.
 - `CNAME` points the GitHub Pages deployment at the custom domain - don't
   delete it.
+- `styles.css` and `script.js` are linked with a `?v=<hash>` stamp of their
+  contents. GitHub Pages caches every file for ten minutes and HTML and CSS
+  expire independently, so without the stamp a visitor can briefly hold new
+  HTML against an old stylesheet and see a broken layout. After editing either
+  file, re-stamp all the HTML in the same commit:
+
+  ```sh
+  css=$(shasum -a 256 styles.css | cut -c1-8)
+  js=$(shasum -a 256 script.js | cut -c1-8)
+  sed -i '' -E "s|(href=\"[^\"]*styles\.css)(\?v=[a-f0-9]+)?\"|\1?v=$css\"|g; \
+               s|(src=\"[^\"]*script\.js)(\?v=[a-f0-9]+)?\"|\1?v=$js\"|g" \
+    $(git ls-files '*.html')
+  ```
+
+  It rewrites any existing stamp, so it is safe to run twice. Use plain `-i`
+  instead of `-i ''` on GNU `sed`.
